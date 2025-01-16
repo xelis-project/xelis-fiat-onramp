@@ -8,7 +8,7 @@ class SelectCurrency {
 
   constructor() {
     input_search_currency.addEventListener(`input`, (e) => {
-      this.search_currency(e.target.value);
+      this.search_currencies(e.target.value);
     });
 
     this.load_currencies(currencies);
