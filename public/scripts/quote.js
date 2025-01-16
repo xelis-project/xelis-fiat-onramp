@@ -270,7 +270,8 @@ class Quote {
     const div_processing_fee = document.createElement(`div`);
     div_processing_fee.innerHTML = `<div>Processing fee</div><div>${this.payment_method.fee} ${this.currency_code}</div>`;
     const div_total_fee = document.createElement(`div`);
-    div_total_fee.innerHTML = `<div>Total fee</div><div>${this.offer.fee + this.payment_method.fee} ${this.currency_code}</div>`;
+    const total_fee = (this.offer.fee + this.payment_method.fee).toFixed(2);
+    div_total_fee.innerHTML = `<div>Total fee</div><div>${total_fee} ${this.currency_code}</div>`;
 
     div_quote_details.append(div_time_quote, div_offer, div_rate, div_network_fee, div_processing_fee, div_total_fee);
     div_quote_details.classList.remove(`hidden`);
