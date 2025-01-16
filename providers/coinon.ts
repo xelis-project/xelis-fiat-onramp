@@ -1,9 +1,8 @@
 import md5 from 'md5';
-import queryString from 'query-string';
 
+// https://www.coinon.io/api.html
 //let api_endpoint = `https://onramp-api.coinon.io`;
 let api_endpoint = `https://onramp-api-dev.coinpal.io`;
-let quote_page_link = `https://onramp.coinon.io/edit`;
 
 interface GetBuyQuoteParams {
   partnerID: string;
@@ -59,24 +58,4 @@ async function get_buy_quote(params: GetBuyQuoteParams): Promise<ApiResponse<Get
   return { data, res }
 }
 
-interface RedirectLinkParams {
-  defaultSendCurrency?: string;
-  sendCurrency?: string;
-  defaultGetCurrency?: string;
-  getCurrency?: string;
-  defaultSendCurrencyAmount?: string;
-  sendCurrencyAmount?: string;
-  defaultGetCurrencyAmount?: string;
-  getCurrencyAmount?: string;
-  token?: string;
-  payMethod?: string;
-  offerType?: string;
-  address?: string;
-}
-
-function get_redirect_link(params: RedirectLinkParams) {
-  const query = queryString.stringify(params);
-  return `${quote_page_link}?${query}`
-}
-
-export default { get_buy_quote, get_redirect_link };
+export default { get_buy_quote };

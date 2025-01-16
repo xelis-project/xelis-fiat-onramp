@@ -469,8 +469,24 @@ a {
 .quote-details {
   display: flex;
   gap: .25rem;
-  font-size: .9rem;
   flex-direction: column;
+
+  background: linear-gradient(45deg, rgba(0, 0, 0, .3), transparent);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.quote-details > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: .5rem;
+}
+
+.quote-details > div > :first-child {
+  opacity: .5;
+  font-size: .9rem;
 }
 
 .xel-quote {
@@ -554,6 +570,11 @@ a {
 
 .currency-list>div:hover {
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.load-err {
+  color: red;
+  font-weight: bold;
 }
 
 .form-err {

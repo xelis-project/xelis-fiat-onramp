@@ -13,7 +13,7 @@ class Quote {
   offer = null;
   payment_method = null;
   address = "";
-  timer = 30;
+  timer = 60;
   timer_id = null;
   loading = false;
 
@@ -28,13 +28,13 @@ class Quote {
       }, 250);
     });
 
-    let input_address_timeout_id;
+    //let input_address_timeout_id;
     input_address.addEventListener(`input`, (e) => {
-      clearTimeout(input_address_timeout_id);
-      input_address_timeout_id = setTimeout(() => {
-        this.address = e.target.value;
-        this.validate_address();
-      }, 250);
+      //clearTimeout(input_address_timeout_id);
+      //input_address_timeout_id = setTimeout(() => {
+      this.address = e.target.value;
+      //this.validate_address();
+      //}, 250);
     });
 
     this.load_quote();
@@ -68,6 +68,8 @@ class Quote {
           return;
         }
       }
+    } else {
+      this.set_load_err(res.statusText);
     }
 
     this.set_no_offers();
@@ -88,22 +90,25 @@ class Quote {
     })
   }
 
-  redirect_offer() {
-    switch ("") {
-      case "coinon":
-
-        return;
-    }
+  set_load_err(text) {
+    const load_err = document.getElementById(`load_err`);
+    load_err.classList.remove(`hidden`);
+    load_err.innerHTML = `Error occurred: ${text}`;
   }
 
   create_offer_item(offer) {
     const content = document.createElement(`div`);
-    content.id = `offer_${offer.network}`;
+    content.id = `offer_${offer.name}`;
     const name = document.createElement(`div`);
-    name.innerHTML = offer.network ? offer.network : ``;
-    const sub = document.createElement(`div`);
-    sub.innerHTML = offer.fee ? `Fee: ${offer.fee} ${this.currency_code}` : ``;
-    content.append(name, sub);
+    name.innerHTML = offer.name ? offer.name : ``;
+    content.append(name);
+
+    if (offer.fee) {
+      const sub = document.createElement(`div`);
+      sub.innerHTML = `Fee: ${offer.fee} ${this.currency_code}`;
+      content.append(sub);
+    }
+
     content.addEventListener('click', () => {
       this.select_offer(offer);
     });
@@ -125,7 +130,7 @@ class Quote {
   }
 
   select_offer(offer) {
-    const div_offer = document.getElementById(`offer_${offer.network}`);
+    const div_offer = document.getElementById(`offer_${offer.name}`);
     div_offers.childNodes.forEach((o) => o.classList.remove("selected"));
     div_offer.classList.add(`selected`);
     this.offer = offer;
@@ -147,7 +152,7 @@ class Quote {
 
   set_no_offers() {
     div_offers.innerHTML = ``;
-    let element = this.create_offer_item({ network: 'No offers' });
+    let element = this.create_offer_item({ name: 'No offers' });
     div_offers.append(element);
     //div_payment_methods_wrap.classList.add(`hidden`);
   }
@@ -175,10 +180,14 @@ class Quote {
     const content = document.createElement(`div`);
     content.id = `payment_method_${payment_method.name}`;
     const name = document.createElement(`div`);
-    name.innerHTML = payment_method.name ? payment_method.name : ``;
-    const sub = document.createElement(`div`);
-    sub.innerHTML = payment_method.fee ? `Fee: ${payment_method.fee} ${this.currency_code}` : ``;
-    content.append(name, sub);
+    name.innerHTML = payment_method.name ? this.get_payment_method_name(payment_method) : ``;
+    content.append(name);
+    if (payment_method.fee) {
+      const sub = document.createElement(`div`);
+      sub.innerHTML = `Fee: ${payment_method.fee} ${this.currency_code}`;
+      content.append(sub);
+    }
+
     content.addEventListener('click', () => {
       this.select_payment_method(payment_method);
     });
@@ -210,7 +219,7 @@ class Quote {
 
   stop_time_quote() {
     if (this.timer_id) clearTimeout(this.timer_id);
-    this.timer = 30;
+    this.timer = 60;
   }
 
   start_time_quote() {
@@ -251,21 +260,19 @@ class Quote {
   set_quote_details() {
     div_quote_details.innerHTML = ``;
     const div_time_quote = document.createElement(`div`);
-    div_time_quote.innerHTML = `New quote in <span id="time_quote">${this.timer}s</span>`;
-    const div_provider = document.createElement(`div`);
-    div_provider.innerHTML = `Provider: ${this.offer.provider}`;
+    div_time_quote.innerHTML = `<div>New quote in</div><div id="time_quote">${this.timer}s</div>`;
     const div_offer = document.createElement(`div`);
-    div_offer.innerHTML = `Offer: ${this.offer.network} (${this.payment_method.name})`;
+    div_offer.innerHTML = `<div>Offer</div><div>${this.offer.name} (${this.get_payment_method_name(this.payment_method)})</div>`;
     const div_rate = document.createElement(`div`);
-    div_rate.innerHTML = `Rate: ${(this.amount / this.offer.xelAmount).toFixed(2)} ${this.currency_code} = 1 XEL`;
+    div_rate.innerHTML = `<div>Rate</div><div>${(this.amount / this.offer.xelAmount).toFixed(2)} ${this.currency_code} = 1 XEL</div>`;
     const div_network_fee = document.createElement(`div`);
-    div_network_fee.innerHTML = `Network fee: ${this.offer.fee} ${this.currency_code}`;
+    div_network_fee.innerHTML = `<div>Network fee</div><div>${this.offer.fee} ${this.currency_code}</div>`;
     const div_processing_fee = document.createElement(`div`);
-    div_processing_fee.innerHTML = `Processing fee: ${this.payment_method.fee} ${this.currency_code}`;
+    div_processing_fee.innerHTML = `<div>Processing fee</div><div>${this.payment_method.fee} ${this.currency_code}</div>`;
     const div_total_fee = document.createElement(`div`);
-    div_total_fee.innerHTML = `Total fee: ${this.offer.fee + this.payment_method.fee} ${this.currency_code}`;
+    div_total_fee.innerHTML = `<div>Total fee</div><div>${this.offer.fee + this.payment_method.fee} ${this.currency_code}</div>`;
 
-    div_quote_details.append(div_time_quote, div_provider, div_offer, div_rate, div_network_fee, div_processing_fee, div_total_fee);
+    div_quote_details.append(div_time_quote, div_offer, div_rate, div_network_fee, div_processing_fee, div_total_fee);
     div_quote_details.classList.remove(`hidden`);
 
     btn_continue.classList.remove(`hidden`);
@@ -287,6 +294,16 @@ class Quote {
     // TODO
   }
 
+  get_payment_method_name(payment_method) {
+    const payment_method_mapping = {
+      "credit_debit_card": "Credit Card"
+      // add here if there are more - there is a list for coinon available here https://www.coinon.io/api.html
+    }
+
+    const name = payment_method_mapping[payment_method.name];
+    return name ? name : payment_method.name;
+  }
+
   continue() {
     // offer and payment_method are automatically selected
     // and cannot be deselected
@@ -305,6 +322,33 @@ class Quote {
     if (!this.address) {
       alert('Enter your XELIS address.');
       return
+    }
+
+    let redirect_url = ``;
+    switch (this.offer.name) {
+      case "coinon":
+        const params = {
+          address: this.address,
+          offerType: "coinon",
+          payMethod: this.payment_method.name,
+          sendCurrency: this.currency_code,
+          sendCurrencyAmount: this.amount,
+          getCurrency: `XEL`,
+          getCurrencyAmount: this.offer.xelAmount
+        }
+
+        const list = Object.keys(params).map((key) => {
+          return `${key}=${params[key]}`
+        });
+
+        redirect_url = `https://onramp.coinon.io/edit?${list.join(`&`)}`;
+        break;
+    }
+
+    if (redirect_url) {
+      window.open(redirect_url, "_blank")
+    } else {
+      alert('No redirection available for this provider.');
     }
   }
 }

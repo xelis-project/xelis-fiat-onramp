@@ -9,8 +9,7 @@ interface PaymentMethod {
 }
 
 interface Offer {
-  provider: string;
-  network: string;
+  name: string;
   xelAmount: number;
   fee: number;
   paymentMethods: PaymentMethod[];
@@ -34,11 +33,6 @@ function get_ip(request: Request) {
   return client_ip;
 }
 
-const payment_method_mapping = {
-  "credit_debit_card": "Credit Card"
-  // add here if there are more - there is a list for coinon available here https://www.coinon.io/api.html
-}
-
 async function get_coinon_offer(ctx: Ctx, currency: string, fiat_amount: string): Promise<Offer> {
   const { request, env } = ctx;
 
@@ -58,11 +52,10 @@ async function get_coinon_offer(ctx: Ctx, currency: string, fiat_amount: string)
       const data = result.data.data;
 
       return {
-        provider: 'CoinOn',
-        network: data.offerType,
+        name: "coinon",
         fee: data.networkFee,
         paymentMethods: [{
-          name: payment_method_mapping[data.paymentMethod] || data.paymentMethod,
+          name: data.paymentMethod,
           fee: data.processingFee,
         }],
         xelAmount: parseFloat(data.cryptoAmount)
