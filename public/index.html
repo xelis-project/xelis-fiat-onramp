@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<head>
+  <title>XELIS Fiat Onramp</title>
+  <link rel="stylesheet" href="./styles/index.css">
+  <link rel="stylesheet" href="./vendors/flag-icons/flag-icons.css" />
+  <link rel="icon" type="image/png" href="./favicon/favicon-48x48.png" sizes="48x48" />
+  <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
+  <link rel="shortcut icon" href="./favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="./favicon/site.webmanifest" />
+</head>
+
+<body>
+  <div>
+    <div class="bg"></div>
+    <!--<div class="logo"></div>-->
+    <div class="bg-2"></div>
+    <div class="cpu"></div>
+    <div class="noise"></div>
+  </div>
+  <div class="box-center">
+    <div class="box">
+      <div class="box-header">
+        <svg>
+          <use href="./assets/xelis_logo.svg#icon" />
+        </svg>
+        <div class="box-title">
+          <div>XELIS</div>
+          <div>Fiat Onramp</div>
+        </div>
+      </div>
+      <div class="box-content-wrap">
+        <div id="box_content_top" class="box-content-top-shadow"></div>
+        <div id="box_content" class="box-content scroll-bar">
+          <div>
+            <div class="input-form">
+              <label>Amount</label>
+              <div class="form-elements">
+                <input id="amount_input" type="text" value="100.00" class="input" placeholder="00.00" />
+                <button id="currency_btn" class="input-btn" onclick="box_bot.open_box_bot('box_bot_currency')"></button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="input-form">
+              <label>XELIS address</label>
+              <input id="input_address" type="text" class="input"
+                placeholder="xel:ufyp55hz5uzxk3d5m4k9h3ahe4k604hthkndt22w4hxmc877lftqqsq5h6n" />
+            </div>
+            <div id="address-err" class="form-err"></div>
+          </div>
+          <div class="input-form">
+            <label>Offers</label>
+            <div id="offers" class="row-items scroll-bar">
+              <!-- auto populated -->
+            </div>
+          </div>
+          <div id="payment_methods_wrap" class="input-form">
+            <label>Payment methods</label>
+            <div id="payment_methods" class="row-items scroll-bar">
+              <!-- auto populated -->
+            </div>
+          </div>
+        </div>
+        <div id="box_content_bot" class="box-content-bot-shadow"></div>
+      </div>
+      <div class="box-footer">
+        <div id="xel_quote" class="xel-quote">
+        </div>
+        <div id="quote_details" class="quote-details hidden">
+        </div>
+        <button id="btn_continue" class="btn-continue hidden" onclick="quote.continue()">
+          Continue
+        </button>
+        <div class="disclaimer">
+          XELIS is not affiliated with, nor responsible for, exchanges processed through third-party providers.
+          We display these options to give users additional opportunities to enter the ecosystem.
+        </div>
+        <div class="disclaimer">
+          Furthermore, we provide a list of exchanges that support XELIS, available <a target="_blank"
+            href="https://xelis.io/exchanges">here</a>.
+        </div>
+      </div>
+      <div id="box_bot_currency" class="box-bot">
+        <div class="box-bot-content">
+          <div class="box-bot-header">
+            <div>Select currency</div>
+            <svg>
+              <use href="./assets/close.svg#icon"></use>
+            </svg>
+          </div>
+          <input id="search_currency_input" type="text" class="input-2" placeholder="Search" />
+          <div id="select_currency_list" class="currency-list scroll-bar">
+            <!-- auto populated -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./vendors/querystring.js"></script>
+  <script src="./scripts/box_bot.js"></script>
+  <script src="./scripts/box_content.js"></script>
+  <script src="./scripts/currencies.js"></script>
+  <script src="./scripts/select_currency.js"></script>
+  <script src="./scripts/quote.js"></script>
+</body>

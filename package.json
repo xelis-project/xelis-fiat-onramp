@@ -1,0 +1,19 @@
+{
+  "name": "xelis-fiat-onramp",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "wrangler pages dev ./public"
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20241230.0",
+    "autoprefixer": "^10.4.20",
+    "esbuild": "^0.24.2",
+    "flag-icons": "^7.2.3",
+    "md5": "^2.3.0",
+    "postcss": "^8.4.49",
+    "postcss-cli": "^11.0.0",
+    "query-string": "^9.1.1"
+  }
+}
