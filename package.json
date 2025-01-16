@@ -13,7 +13,6 @@
     "flag-icons": "^7.2.3",
     "md5": "^2.3.0",
     "postcss": "^8.4.49",
-    "postcss-cli": "^11.0.0",
-    "query-string": "^9.1.1"
+    "postcss-cli": "^11.0.0"
   }
 }
