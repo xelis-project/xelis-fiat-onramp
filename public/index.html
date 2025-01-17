@@ -38,7 +38,7 @@
               <label>Amount</label>
               <div class="form-elements">
                 <input id="amount_input" type="text" value="100.00" class="input" placeholder="00.00" />
-                <button id="currency_btn" class="input-btn" onclick="box_bot.open_box_bot('box_bot_currency')"></button>
+                <button id="currency_btn" class="input-btn" onclick="box_bot.open('box_bot_currency')"></button>
               </div>
             </div>
           </div>
@@ -95,6 +95,38 @@
           <input id="search_currency_input" type="text" class="input-2" placeholder="Search" />
           <div id="select_currency_list" class="currency-list scroll-bar">
             <!-- auto populated -->
+          </div>
+        </div>
+      </div>
+      <div id="box_bot_why" class="box-bot">
+        <div class="box-bot-content">
+          <div class="box-bot-header">
+            <div>Why no offers?</div>
+            <svg>
+              <use href="./assets/close.svg#icon"></use>
+            </svg>
+          </div>
+          <div class="no-offers-details scroll-bar">
+            <p>
+              This is a simple interface that consolidates fiat onramps from multiple providers.
+              Each provider has its own set of restrictions and requirements. Some may offer services in specific
+              locations,
+              while others cater to particular currencies.
+            </p>
+            <p>
+              If no offers are available, it typically indicates that the providers do no support your IP location or
+              the selected currency.
+              You may consider using a VPN as an alternative solution.
+            </p>
+            <p>Providers</p>
+            <div>CoinOn</div>
+            <div class="provider-details">
+              CoinOn offers services exclusively to Australia, Austria, Bahrain, Belgium, Bolivia, Brazil, Bulgaria, Colombia,
+              Costa Rica, Croatia, Cyprus, Czech, Republic, Denmark, Dominican Republic, Estonia,
+              Finland, France, Gibraltar, Greece, Hong Kong, Hungary, Iceland, Ireland, Italy, Korea, Latvia,
+              Lichteinstein, Lithania, Luxembourg, Malta, Mexico, New Zealand, Norway, Oman, Philippines, Poland,
+              Portugal, Romania, Serbia, Singapore, Slovakia, Slovenia, Spain, Sweden, Switzerland, Taiwan, Thailand.
+            </div>
           </div>
         </div>
       </div>

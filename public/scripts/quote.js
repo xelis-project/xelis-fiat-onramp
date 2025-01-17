@@ -244,7 +244,7 @@ class Quote {
   }
 
   set_xel_quote() {
-    div_xel_quote.classList.remove(`xel-quote-loading`, `xel-quote-none`);
+    div_xel_quote.classList.remove(`xel-quote-loading`);
     div_xel_quote.innerHTML = ``;
     const div_fiat_amount = document.createElement(`div`);
     const currency = currencies.find((x) => x.code === this.currency_code);
@@ -289,8 +289,18 @@ class Quote {
 
   set_no_xel_quote() {
     div_xel_quote.classList.remove(`xel-quote-loading`);
-    div_xel_quote.classList.add(`xel-quote-none`)
-    div_xel_quote.innerHTML = `No offers available.`;
+
+    var div_no_offers = document.createElement(`div`);
+    div_no_offers.innerHTML = `No offers available.`;
+
+    var btn_why = document.createElement(`button`);
+    btn_why.classList.add(`btn-why`);
+    btn_why.innerHTML = `Why?`;
+    btn_why.addEventListener(`click`, () => {
+      box_bot.open(`box_bot_why`);
+    });
+
+    div_xel_quote.append(div_no_offers, btn_why);
   }
 
   validate_address() {

@@ -509,10 +509,6 @@ a {
   opacity: .4;
 }
 
-.xel-quote-none {
-  opacity: .4;
-}
-
 .xel-quote>div {
   display: flex;
   gap: 1rem;
@@ -586,4 +582,28 @@ a {
 
 .round-icon {
   border-radius: 50%;
+}
+
+.no-offers-details {
+  overflow: auto;
+}
+
+.provider-details {
+  margin: .25rem 0 .5rem 0;
+  font-size: .8rem;
+  opacity: .7;
+}
+
+.btn-why {
+  background-color: #02FFCF;
+  border-radius: 1rem;
+  padding: .5rem 1rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.btn-why:hover {
+  transform: scale(.97);
 }

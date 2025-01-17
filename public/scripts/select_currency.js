@@ -35,7 +35,7 @@ class SelectCurrency {
   set_currency(code) {
     const currency = currencies.find((x) => x.code === code);
     btn_currency.innerHTML = `<i class="fi fi-${currency.country_code.toLowerCase()} fis round-icon"></i>${currency.code}`;
-    box_bot.close_box_bot(`box_bot_currency`);
+    box_bot.close(`box_bot_currency`);
   }
 
   clear_currencies() {
