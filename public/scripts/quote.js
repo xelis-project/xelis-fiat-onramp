@@ -142,7 +142,7 @@ class Quote {
   }
 
   select_payment_method(payment_method) {
-    if (offer.paymentMethods && offer.paymentMethods.length > 0) {
+    if (this.offer.paymentMethods && this.offer.paymentMethods.length > 0) {
       const div_payment_method = document.getElementById(`payment_method_${payment_method.name}`);
       div_payment_methods.childNodes.forEach((o) => o.classList.remove("selected"));
       div_payment_method.classList.add(`selected`);
