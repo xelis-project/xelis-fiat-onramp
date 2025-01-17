@@ -43,7 +43,7 @@ async function get_coinon_offer(ctx: Ctx, currency: string, fiat_amount: string)
     partnerID: env.COINON_PARTNER_ID,
     fiatCurrency: currency,
     cryptoCurrency: `XEL`,
-    ip: "", //client_ip || "54.251.1.0",
+    ip: client_ip || "54.251.1.0", // ip for testing with CoinOn: singapore "54.251.1.0" hong kong "103.125.233.22"
     fiatAmount: fiat_amount,
   });
 
