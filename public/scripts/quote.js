@@ -130,24 +130,26 @@ class Quote {
   }
 
   select_offer(offer) {
-    const div_offer = document.getElementById(`offer_${offer.name}`);
-    div_offers.childNodes.forEach((o) => o.classList.remove("selected"));
-    div_offer.classList.add(`selected`);
-    this.offer = offer;
+    if (offer.paymentMethods && offer.paymentMethods.length > 0) {
+      const div_offer = document.getElementById(`offer_${offer.name}`);
+      div_offers.childNodes.forEach((o) => o.classList.remove("selected"));
+      div_offer.classList.add(`selected`);
+      this.offer = offer;
 
-    this.set_payment_methods(offer.paymentMethods);
-    if (offer.paymentMethods.length > 0) {
+      this.set_payment_methods(offer.paymentMethods);
       this.select_payment_method(offer.paymentMethods[0]);
     }
   }
 
   select_payment_method(payment_method) {
-    const div_payment_method = document.getElementById(`payment_method_${payment_method.name}`);
-    div_payment_methods.childNodes.forEach((o) => o.classList.remove("selected"));
-    div_payment_method.classList.add(`selected`);
-    this.payment_method = payment_method;
+    if (offer.paymentMethods && offer.paymentMethods.length > 0) {
+      const div_payment_method = document.getElementById(`payment_method_${payment_method.name}`);
+      div_payment_methods.childNodes.forEach((o) => o.classList.remove("selected"));
+      div_payment_method.classList.add(`selected`);
+      this.payment_method = payment_method;
 
-    this.set_xel_quote();
+      this.set_xel_quote();
+    }
   }
 
   set_no_offers() {
